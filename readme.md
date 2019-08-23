@@ -9,7 +9,7 @@ The provided codebase is written in .NET Core and is structured as follows:
 -	A DataTransferObjects layer where any DTOs are stored
 -	A repository layer where entities are saved
 
-##The following needs to be completed:
+## The following needs to be completed:
 1.	Implement the GET route to return all customers
 
 This is found in the CustomersController and is currently returning null. You could return either the whole list or a paginated list of customers. You can modify the route to fit whatever parameters you deem fit to accomplish this.
