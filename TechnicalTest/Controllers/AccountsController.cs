@@ -1,8 +1,8 @@
 ﻿namespace TechnicalTest.Controllers
 {
-    using BusinessLogic.Interfaces;
-    using DataTransferObjects;
     using Microsoft.AspNetCore.Mvc;
+    using POC.BusinessLogic.Interfaces;
+    using POC.DataTransferObjects;
     using System;
 
     [Route("api/accounts")]
@@ -46,13 +46,13 @@
             this.AccountsManager.DepositFunds(customerId, depositDetails.Funds);
         }
 
-        [HttpPost("{id}/withdraw")]
+        [HttpPost("{customerId}/withdraw")]
         public void WithdrawFunds(Int32 customerId, [FromBody] WithrdawalDetails withrdawalDetails)
         {
             this.AccountsManager.WithdrawFunds(customerId, withrdawalDetails.Funds);
         }
 
-        [HttpPost("{id}/transfer")]
+        [HttpPost("transfer")]
         public void TransferFunds([FromBody] TransferDetails transferDetails)
         {
             this.AccountsManager.TransferFunds(transferDetails);

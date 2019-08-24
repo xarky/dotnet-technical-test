@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using BusinessLogic.Interfaces;
-    using DataTransferObjects;
     using Microsoft.AspNetCore.Mvc;
+    using POC.BusinessLogic.Interfaces;
+    using POC.DataTransferObjects;
 
     [Route("api/customers")]
     [ApiController]

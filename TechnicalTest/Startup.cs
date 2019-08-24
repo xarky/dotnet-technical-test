@@ -6,9 +6,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace TechnicalTest
 {
-    using BusinessLogic.Interfaces;
-    using BusinessLogic.Managers;
-    using Repository;
+    using POC.BusinessLogic.Interfaces;
+    using POC.BusinessLogic.Managers;
+    using Microsoft.EntityFrameworkCore;
+    using Model;
+    using System;
+    using DbService;
+    using POC.Common;
 
     public class Startup
     {
@@ -22,15 +26,18 @@ namespace TechnicalTest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureDatabase(services);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddSingleton<IRepository, InMemoryRepository>();
-            services.AddSingleton<ICustomersManager, CustomersManager>();
-            services.AddSingleton<IAccountsManager, AccountsManager>();
+            //services.AddSingleton<IRepository, InMemoryRepository>();
+            services.AddTransient<IRepository, DbRepository>();
+            services.AddTransient<ICustomersManager, CustomersManager>();
+            services.AddTransient<IAccountsManager, AccountsManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -38,6 +45,27 @@ namespace TechnicalTest
             }
 
             app.UseMvc();
+
+            UpdateDatabases(serviceProvider);
+        }
+
+        protected virtual void ConfigureDatabase(IServiceCollection services)
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                    o =>
+                    {
+                        o.MigrationsAssembly("Model");
+                        o.EnableRetryOnFailure(2);
+                    }),
+                    ServiceLifetime.Transient);
+        }
+
+        public void UpdateDatabases(IServiceProvider services)
+        {
+            var applictionDbContext = services.GetService<ApplicationDbContext>();
+            applictionDbContext.Database.Migrate();
+            applictionDbContext.Database.EnsureCreated();
         }
     }
 }

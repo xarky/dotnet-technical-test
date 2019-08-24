@@ -1,8 +1,8 @@
-﻿using DataTransferObjects;
+﻿using POC.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 
-namespace Repository
+namespace POC.Common
 {
     public interface IRepository
     {

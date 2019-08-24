@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\POC.Common\POC.Common.csproj" />
+    <ProjectReference Include="..\POC.DataTransferObjects\POC.DataTransferObjects.csproj" />
+  </ItemGroup>
+
+</Project>
