@@ -5,6 +5,7 @@ using System.Text;
 namespace Repository
 {
     using System.Linq;
+    using System.Transactions;
     using DataTransferObjects;
 
     /// <summary>
@@ -51,14 +52,17 @@ namespace Repository
         public void DepositFunds(Int32 customerId,
                                  Decimal funds)
         {
-            if (this.Balances.ContainsKey(customerId))
+            lock(Balances)
             {
-                this.Balances[customerId] += funds;
-            }
-            else
-            {
-                this.Balances.Add(customerId, funds);
-            }
+                if (this.Balances.ContainsKey(customerId))
+                {
+                    this.Balances[customerId] += funds;
+                }
+                else
+                {
+                    this.Balances.Add(customerId, funds);
+                }
+            }            
         }
 
         /// <summary>
@@ -68,7 +72,10 @@ namespace Repository
         /// <returns></returns>
         public Decimal GetAvailableFunds(Int32 customerId)
         {
-            return this.Balances.ContainsKey(customerId) ? this.Balances[customerId] : 0;
+            lock (Balances)
+            {
+                return this.Balances.ContainsKey(customerId) ? this.Balances[customerId] : 0;
+            }
         }
 
         /// <summary>
@@ -118,10 +125,18 @@ namespace Repository
         public void WithdrawFunds(Int32 customerId,
                                   Decimal funds)
         {
-            if (this.Balances.ContainsKey(customerId))
-            {
-                this.Balances[customerId] -= funds;
-            }
+            WithdrawFromAvailableFunds(customerId, funds);
+        }
+
+        /// <summary>
+        /// Transfers funds between two customers
+        /// </summary>
+        /// <param name="transferDetails">Details about the transfer</param>
+        public void TransferFunds(TransferDetails transferDetails)
+        {
+            var availableFunds = WithdrawFromAvailableFunds(transferDetails.From, transferDetails.Funds);
+
+            DepositFunds(transferDetails.To, availableFunds);
         }
 
         /// <summary>
@@ -132,6 +147,30 @@ namespace Repository
         private Boolean DoesCustomerExist(Int32 id)
         {
             return this.Customers.Any(c => c.Id == id);
+        }
+
+        private Decimal WithdrawFromAvailableFunds(Int32 customerId, Decimal funds)
+        {
+            Decimal transferedFunds = 0;
+
+            if (this.Balances.ContainsKey(customerId))
+            {
+                lock (this.Balances)
+                {
+                    if (this.Balances[customerId] >= funds)
+                    {
+                        transferedFunds = funds;
+                        this.Balances[customerId] -= funds;
+                    }
+                    else
+                    {
+                        transferedFunds = this.Balances[customerId];
+                        this.Balances[customerId] = 0;
+                    }
+                }
+            }
+
+            return transferedFunds;
         }
     }
 }

@@ -56,6 +56,12 @@
         void WithdrawFunds(Int32 customerId,
                            Decimal funds);
 
+        /// <summary>
+        /// Transfers funds between two customers
+        /// </summary>
+        /// <param name="transferDetails">Details about the transfer</param>
+        void TransferFunds(TransferDetails transferDetails);
+
         #endregion
     }
 }

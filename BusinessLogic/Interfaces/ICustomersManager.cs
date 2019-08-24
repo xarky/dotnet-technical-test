@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic
+﻿namespace BusinessLogic.Interfaces
 {
     using System;
     using System.Collections.Generic;

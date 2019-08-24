@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace TechnicalTest
 {
-    using BusinessLogic;
+    using BusinessLogic.Interfaces;
+    using BusinessLogic.Managers;
     using Repository;
 
     public class Startup
@@ -31,7 +26,7 @@ namespace TechnicalTest
 
             services.AddSingleton<IRepository, InMemoryRepository>();
             services.AddSingleton<ICustomersManager, CustomersManager>();
-
+            services.AddSingleton<IAccountsManager, AccountsManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

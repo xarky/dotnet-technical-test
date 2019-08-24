@@ -1,7 +1,8 @@
-﻿namespace BusinessLogic
+﻿namespace BusinessLogic.Managers
 {
     using System;
     using System.Collections.Generic;
+    using BusinessLogic.Interfaces;
     using DataTransferObjects;
     using Repository;
 

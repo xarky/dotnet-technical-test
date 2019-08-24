@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using BusinessLogic;
+    using BusinessLogic.Interfaces;
     using DataTransferObjects;
     using Microsoft.AspNetCore.Mvc;
 
