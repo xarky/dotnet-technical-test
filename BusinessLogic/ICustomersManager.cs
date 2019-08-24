@@ -1,6 +1,7 @@
 ﻿namespace BusinessLogic
 {
     using System;
+    using System.Collections.Generic;
     using DataTransferObjects;
 
     public interface ICustomersManager
@@ -19,6 +20,12 @@
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         Customer GetCustomer(Int32 id);
+
+        /// <summary>
+        /// Gets all customers.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Customer> GetCustomers();
 
         /// <summary>
         /// Adds the customer.

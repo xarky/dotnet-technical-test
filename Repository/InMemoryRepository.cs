@@ -82,6 +82,15 @@ namespace Repository
         }
 
         /// <summary>
+        /// Gets all customers.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Customer> GetCustomers()
+        {
+            return this.Customers;
+        }
+
+        /// <summary>
         /// Saves the customer.
         /// </summary>
         /// <param name="customer">The customer.</param>

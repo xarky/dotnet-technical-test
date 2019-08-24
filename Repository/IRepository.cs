@@ -1,6 +1,7 @@
 ﻿namespace Repository
 {
     using System;
+    using System.Collections.Generic;
     using DataTransferObjects;
 
     public interface IRepository
@@ -34,6 +35,12 @@
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         Customer GetCustomer(Int32 id);
+
+        /// <summary>
+        /// Gets all customers.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Customer> GetCustomers();
 
         /// <summary>
         /// Saves the customer.

@@ -1,6 +1,7 @@
 ﻿namespace BusinessLogic
 {
     using System;
+    using System.Collections.Generic;
     using DataTransferObjects;
     using Repository;
 
@@ -48,6 +49,15 @@
         public Customer GetCustomer(Int32 id)
         {
             return this.Repository.GetCustomer(id);
+        }
+
+        /// <summary>
+        /// Gets all customers.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Customer> GetCustomers()
+        {
+            return this.Repository.GetCustomers();
         }
 
         /// <summary>
