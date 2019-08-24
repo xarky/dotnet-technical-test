@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POC.BusinessLogic", "POC.Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POC.Common", "POC.Common\POC.Common.csproj", "{7B82949E-A01E-4BDE-8269-C1C60BA695CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2FD8DBEA-8568-4BD4-B008-9BE1F4B1E793}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{7B82949E-A01E-4BDE-8269-C1C60BA695CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B82949E-A01E-4BDE-8269-C1C60BA695CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B82949E-A01E-4BDE-8269-C1C60BA695CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FD8DBEA-8568-4BD4-B008-9BE1F4B1E793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD8DBEA-8568-4BD4-B008-9BE1F4B1E793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD8DBEA-8568-4BD4-B008-9BE1F4B1E793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FD8DBEA-8568-4BD4-B008-9BE1F4B1E793}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
