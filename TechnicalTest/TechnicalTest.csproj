@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InMemoryService\InMemoryService.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
     <ProjectReference Include="..\POC.BusinessLogic\POC.BusinessLogic.csproj" />
     <ProjectReference Include="..\POC.DataTransferObjects\POC.DataTransferObjects.csproj" />

@@ -1,19 +1,18 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DbService;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Model;
+using POC.BusinessLogic.Interfaces;
+using POC.BusinessLogic.Managers;
+using POC.Common;
+using System;
 
 namespace TechnicalTest
 {
-    using POC.BusinessLogic.Interfaces;
-    using POC.BusinessLogic.Managers;
-    using Microsoft.EntityFrameworkCore;
-    using Model;
-    using System;
-    using DbService;
-    using POC.Common;
-
     public class Startup
     {
         public Startup(IConfiguration configuration)
