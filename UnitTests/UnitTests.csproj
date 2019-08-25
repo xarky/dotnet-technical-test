@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InMemoryService\POC.InMemoryService.csproj" />
     <ProjectReference Include="..\POC.BusinessLogic\POC.BusinessLogic.csproj" />
     <ProjectReference Include="..\POC.Common\POC.Common.csproj" />
   </ItemGroup>

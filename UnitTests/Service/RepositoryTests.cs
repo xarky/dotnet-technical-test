@@ -6,21 +6,40 @@ using POC.DbService;
 using System;
 using Xunit;
 
-namespace UnitTests.DbService
+namespace UnitTests.Service
 {
-    public class DbRepositoryTests
+    public class RepositoryTests
     {
         #region Fields
 
         private readonly Mock<ILogRepository> logRepository;
+        private readonly IRepository repository;
 
         #endregion
 
         #region Constructors
 
-        public DbRepositoryTests()
+        public RepositoryTests()
         {
             logRepository = new Mock<ILogRepository>();
+            repository = ConfigureRepository();
+        }
+
+        #endregion
+               
+        #region Private Methods
+
+        private IRepository ConfigureRepository()
+        {
+            // test using our own InMemory implementation, OR 
+            // bypass the DbContext using an out-of-the-box InMemoryDatabase implementation
+
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            optionsBuilder.UseInMemoryDatabase();
+            var context = new ApplicationDbContext(optionsBuilder.Options);
+            return new DbRepository(context, logRepository.Object);
+
+            //return new POC.InMemoryService.InMemoryRepository();
         }
 
         #endregion
@@ -33,8 +52,6 @@ namespace UnitTests.DbService
         [InlineData(3, 5)]
         public void DepositFunds_EmptyAccount(Int32 customerId, Decimal depositableFunds)
         {
-            DbRepository repository = ConfigureRepository();
-
             repository.DepositFunds(customerId, depositableFunds);
 
             var result = repository.GetAvailableFunds(customerId);
@@ -48,8 +65,6 @@ namespace UnitTests.DbService
         [InlineData(6, 10, 5)]
         public void DepositFunds_ExistingAccountWithFunds(Int32 customerId, Decimal currentBalance, Decimal depositableFunds)
         {
-            DbRepository repository = ConfigureRepository();
-
             repository.DepositFunds(customerId, currentBalance);
             repository.DepositFunds(customerId, depositableFunds);
 
@@ -69,8 +84,6 @@ namespace UnitTests.DbService
             Decimal destinationInitialBalance,
             Decimal fundsToBeTransfered)
         {
-            DbRepository repository = ConfigureRepository();
-
             repository.DepositFunds(sourceCustomerId, sourceInitialBalance);
             repository.DepositFunds(destinationCustomerId, destinationInitialBalance);
 
@@ -100,8 +113,6 @@ namespace UnitTests.DbService
             Decimal destinationInitialBalance,
             Decimal fundsToBeTransfered)
         {
-            DbRepository repository = ConfigureRepository();
-
             repository.DepositFunds(sourceCustomerId, sourceInitialBalance);
             repository.DepositFunds(destinationCustomerId, destinationInitialBalance);
 
@@ -127,8 +138,6 @@ namespace UnitTests.DbService
         [InlineData(17, 100, 5)]
         public void WithdrawFunds_ExistingAccountWithEnoughFunds(Int32 customerId, Decimal currentBalance, Decimal withdrawableFunds)
         {
-            DbRepository repository = ConfigureRepository();
-
             repository.DepositFunds(customerId, currentBalance);
             repository.WithdrawFunds(customerId, withdrawableFunds);
 
@@ -143,26 +152,12 @@ namespace UnitTests.DbService
         [InlineData(20, 100, 200)]
         public void WithdrawFunds_ExistingAccountWithNotEnoughFunds(Int32 customerId, Decimal currentBalance, Decimal withdrawableFunds)
         {
-            DbRepository repository = ConfigureRepository();
-
             repository.DepositFunds(customerId, currentBalance);
             repository.WithdrawFunds(customerId, withdrawableFunds);
 
             var result = repository.GetAvailableFunds(customerId);
 
             Assert.Equal(0, result);
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private DbRepository ConfigureRepository()
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseInMemoryDatabase();
-            var context = new ApplicationDbContext(optionsBuilder.Options);
-            return new DbRepository(context, logRepository.Object);
         }
 
         #endregion
