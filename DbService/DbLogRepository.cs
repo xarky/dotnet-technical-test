@@ -2,7 +2,7 @@
 using POC.Common;
 using System;
 
-namespace DbService
+namespace POC.DbService
 {
     public class DbLogRepository : ILogRepository
     {

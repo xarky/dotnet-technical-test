@@ -4,7 +4,7 @@ using POC.DataTransferObjects;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DbService
+namespace POC.DbService
 {
     public class DbRepository : IRepository
     {

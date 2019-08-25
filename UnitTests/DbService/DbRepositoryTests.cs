@@ -1,8 +1,8 @@
-﻿using DbService;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Model;
 using Moq;
 using POC.Common;
+using POC.DbService;
 using System;
 using Xunit;
 

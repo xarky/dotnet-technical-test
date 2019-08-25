@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{A2EEE561-9D89-4BC5-9679-80CBEF8EE8B9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbService", "DbService\DbService.csproj", "{1E48BE9A-4E93-405E-A598-ACACC4BB7859}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POC.DbService", "DbService\POC.DbService.csproj", "{1E48BE9A-4E93-405E-A598-ACACC4BB7859}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POC.DataTransferObjects", "POC.DataTransferObjects\POC.DataTransferObjects.csproj", "{A98D1699-86D4-4855-AE0D-F8B4F2BCD9EA}"
 EndProject
@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POC.Common", "POC.Common\PO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2FD8DBEA-8568-4BD4-B008-9BE1F4B1E793}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMemoryService", "InMemoryService\InMemoryService.csproj", "{DA181ABF-CF42-41C7-A1F8-1BEA69F85075}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POC.InMemoryService", "InMemoryService\POC.InMemoryService.csproj", "{DA181ABF-CF42-41C7-A1F8-1BEA69F85075}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

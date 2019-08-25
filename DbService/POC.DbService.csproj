@@ -2,9 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>POC.DbService</AssemblyName>
+    <RootNamespace>POC.DbService</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj" />
     <ProjectReference Include="..\POC.Common\POC.Common.csproj" />
     <ProjectReference Include="..\POC.DataTransferObjects\POC.DataTransferObjects.csproj" />
   </ItemGroup>

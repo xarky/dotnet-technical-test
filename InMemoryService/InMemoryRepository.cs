@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace InMemoryService
+namespace POC.InMemoryService
 {
     public class InMemoryRepository : IRepository
     {

@@ -1,5 +1,4 @@
-﻿using DbService;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +8,7 @@ using Model;
 using POC.BusinessLogic.Interfaces;
 using POC.BusinessLogic.Managers;
 using POC.Common;
+using POC.DbService;
 using System;
 
 namespace TechnicalTest
