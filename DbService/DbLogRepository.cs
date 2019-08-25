@@ -21,6 +21,8 @@ namespace DbService
 
         #endregion
 
+        #region Methods
+
         public void LogDeposit(int customerId, decimal funds)
         {
             dbContext.TransactionAudits.Add(new Model.Entities.TransactionAudit
@@ -63,5 +65,7 @@ namespace DbService
 
             dbContext.SaveChanges();
         }
+
+        #endregion
     }
 }

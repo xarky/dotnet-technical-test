@@ -1,14 +1,13 @@
 ﻿using FizzWare.NBuilder;
 using Moq;
+using Newtonsoft.Json;
 using POC.BusinessLogic.Managers;
 using POC.Common;
 using POC.DataTransferObjects;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Xunit;
 using System.Linq;
-using Newtonsoft.Json;
+using Xunit;
 
 namespace UnitTests.BusinessLogic
 {
@@ -29,7 +28,7 @@ namespace UnitTests.BusinessLogic
 
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         [Theory]
         [InlineData(1)]

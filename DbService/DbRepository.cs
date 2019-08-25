@@ -8,14 +8,24 @@ namespace DbService
 {
     public class DbRepository : IRepository
     {
+        #region Private Fields
+
         private readonly ApplicationDbContext dbContext;
         private readonly ILogRepository logRepository;
-        
+
+        #endregion
+
+        #region Constructors
+
         public DbRepository(ApplicationDbContext dbContext, ILogRepository logRepository)
         {
             this.dbContext = dbContext;
             this.logRepository = logRepository;
         }
+
+        #endregion
+
+        #region Methods
 
         public void DeleteCustomer(int id)
         {
@@ -127,5 +137,7 @@ namespace DbService
                 logRepository.LogWithdrawal(customerId, withrdawableFunds);
             }
         }
+
+        #endregion
     }
 }
