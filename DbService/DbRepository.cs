@@ -1,7 +1,6 @@
 ﻿using Model;
 using POC.Common;
 using POC.DataTransferObjects;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,10 +9,12 @@ namespace DbService
     public class DbRepository : IRepository
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly ILogRepository logRepository;
         
-        public DbRepository(ApplicationDbContext dbContext)
+        public DbRepository(ApplicationDbContext dbContext, ILogRepository logRepository)
         {
             this.dbContext = dbContext;
+            this.logRepository = logRepository;
         }
 
         public void DeleteCustomer(int id)
@@ -39,16 +40,9 @@ namespace DbService
                 customerBalance.Funds += funds;
             }
 
-            dbContext.TransactionAudits.Add(new Model.Entities.TransactionAudit
-            {
-                Id = Guid.NewGuid(),
-                CustomerId = customerId,
-                Timestamp = DateTime.Now,
-                Type = Model.Entities.TransactionType.Deposit,
-                Funds = funds
-            });
-
             dbContext.SaveChanges();
+
+            logRepository.LogDeposit(customerId, funds);
         }
 
         public decimal GetAvailableFunds(int customerId)
@@ -111,18 +105,10 @@ namespace DbService
                 var transferableFunds = sourceAccount.Funds > transferDetails.Funds ? transferDetails.Funds : sourceAccount.Funds;
                 sourceAccount.Funds -= transferableFunds;
                 destinationAccount.Funds += transferableFunds;
-
-                dbContext.TransactionAudits.Add(new Model.Entities.TransactionAudit
-                {
-                    Id = Guid.NewGuid(),
-                    CustomerId = transferDetails.To,
-                    Timestamp = DateTime.Now,
-                    Type = Model.Entities.TransactionType.Transfer,
-                    Funds = transferableFunds,
-                    FromCustomerId = transferDetails.From
-                });
-
+                
                 dbContext.SaveChanges();
+
+                logRepository.LogTransfer(transferDetails.From, transferDetails.To, transferableFunds);
             }
         }
 
@@ -135,17 +121,10 @@ namespace DbService
                 var withrdawableFunds = sourceAccount.Funds > funds ? funds : sourceAccount.Funds;
 
                 sourceAccount.Funds -= withrdawableFunds;
-
-                dbContext.TransactionAudits.Add(new Model.Entities.TransactionAudit
-                {
-                    Id = Guid.NewGuid(),
-                    CustomerId = customerId,
-                    Timestamp = DateTime.Now,
-                    Type = Model.Entities.TransactionType.Withdrawal,
-                    Funds = withrdawableFunds
-                });
-
+                
                 dbContext.SaveChanges();
+
+                logRepository.LogWithdrawal(customerId, withrdawableFunds);
             }
         }
     }

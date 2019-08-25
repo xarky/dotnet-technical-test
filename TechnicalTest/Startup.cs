@@ -34,6 +34,7 @@ namespace TechnicalTest
             services.AddTransient<IRepository, DbRepository>();
             services.AddTransient<ICustomersManager, CustomersManager>();
             services.AddTransient<IAccountsManager, AccountsManager>();
+            services.AddTransient<ILogRepository, DbLogRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

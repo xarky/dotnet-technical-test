@@ -1,6 +1,8 @@
 ﻿using DbService;
 using Microsoft.EntityFrameworkCore;
 using Model;
+using Moq;
+using POC.Common;
 using System;
 using Xunit;
 
@@ -8,6 +10,23 @@ namespace UnitTests.DbService
 {
     public class DbRepositoryTests
     {
+        #region Fields
+
+        private readonly Mock<ILogRepository> logRepository;
+
+        #endregion
+
+        #region Constructors
+
+        public DbRepositoryTests()
+        {
+            logRepository = new Mock<ILogRepository>();
+        }
+
+        #endregion
+
+        #region Public Methods
+
         [Theory]
         [InlineData(1, 100)]
         [InlineData(2, 20)]
@@ -134,12 +153,18 @@ namespace UnitTests.DbService
             Assert.Equal(0, result);
         }
 
+        #endregion
+
+        #region Private Methods
+
         private DbRepository ConfigureRepository()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionsBuilder.UseInMemoryDatabase();
             var context = new ApplicationDbContext(optionsBuilder.Options);
-            return new DbRepository(context);
+            return new DbRepository(context, logRepository.Object);
         }
+
+        #endregion
     }
 }
